@@ -27,7 +27,7 @@ void SyntaxAnalyzer::syntax() {
     if(nextToken == STOP){
         cout << "Syntax is correct" <<endl;
     }else{
-        cout << "Error" << endl;
+        cout << exitString << endl;
         exit(1);
     }
 
@@ -50,19 +50,32 @@ void SyntaxAnalyzer::declaration(){
         nextToken = LA.lex();
         currentToken = LA.lexenum;
         declarationPrime();
+    }else {
+        if (emptyTest == EMPTY) {
+
+        }
+        cout << exitString << endl;
     }
 
 }
-void SyntaxAnalyzer::declarationPrime(){
+void SyntaxAnalyzer::declarationPrime() {
+    declarationPrimeFactor();
 
 }
-void SyntaxAnalyzer::declarationPrimeFactor(){
+void SyntaxAnalyzer::declarationPrimeFactor() {
+    if (currentToken.compare(";")) {
+        nextToken = LA.lex();
+        currentToken = LA.lexenum;
+    }else
 
 }
 void SyntaxAnalyzer::typeSpecific(){
     if(currentToken.compare("int") || currentToken.compare("float") || currentToken.compare("void")){
         nextToken = LA.lex();
         currentToken = LA.lexenum;
+    }else {
+        // Set Empty variable
+        emptyTest = EMPTY;
     }
 
 }

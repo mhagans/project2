@@ -9,7 +9,7 @@
 
 using namespace std;
 
-enum {DIGIT, LETTER, KEYWORD, ID, INT, FLOAT, ERROR, SPACE, STOP, SYMBOL};
+enum {DIGIT, LETTER, KEYWORD, ID, INT, FLOAT, ERROR, SPACE, STOP, SYMBOL, EMPTY, NOTEMPTY};
 
 class LexicalAnalyzer{
 

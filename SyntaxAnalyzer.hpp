@@ -15,6 +15,10 @@ public:
     SyntaxAnalyzer(string in);
     virtual ~SyntaxAnalyzer();
 
+    string exitString = "Incorrect Syntax Exiting Program";
+    int emptyTest;
+
+
 private:
     void program();
     void declarationList();

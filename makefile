@@ -1,6 +1,6 @@
 CFLAGS = -std=c++11
 
-p1: main.o LexicalAnalyzer.o
+p2: main.o LexicalAnalyzer.o SyntaxAnalyzer.o
 	g++ -o p1 main.o LexicalAnalyzer.o
 	
 main.o: main.cpp
@@ -8,3 +8,6 @@ main.o: main.cpp
 	
 LexicalAnalyzer.o: LexicalAnalyzer.cpp LexicalAnalyzer.hpp
 	g++ -c LexicalAnalyzer.cpp
+
+SyntaxAnalyzer.o: SyntaxAnalyzer.cpp SyntaxAnalyzer.hpp
+	g++ -c SyntaxAnalyzer.cpp
