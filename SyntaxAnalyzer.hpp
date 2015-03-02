@@ -8,18 +8,23 @@
 
 using namespace std;
 
-class SyntaxAnalyzer{
-public:
+enum{EMPTY};
+
+class SyntaxAnalyzer {
+    public:
     void syntax();
-    void setNewInput(string in);
-    SyntaxAnalyzer(string in);
+    void setNewInput(string
+    in);
+    SyntaxAnalyzer(string
+    in);
     virtual ~SyntaxAnalyzer();
 
-    string exitString = "Incorrect Syntax Exiting Program";
+    string
+    exitString = "Incorrect Syntax Exiting Program";
     int emptyTest;
 
 
-private:
+    private:
     void program();
     void declarationList();
     void declarationListPrime();
@@ -62,9 +67,11 @@ private:
 
 
 
-private:
-    LexicalAnalyzer LA;
+    private:
+    LexicalAnalyzer
+    LA;
     int nextToken;
+    int tempToken;
     string currentToken;
 };
 

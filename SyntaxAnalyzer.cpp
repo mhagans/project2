@@ -1,5 +1,6 @@
 #include "SyntaxAnalyzer.hpp"
 #include <iostream>
+
 #include "string"
 
 using namespace std;
@@ -38,10 +39,10 @@ void SyntaxAnalyzer::program(){
 }
 void SyntaxAnalyzer::declarationList(){
     declaration();
-    declarationListPrime();
+    if (nextToken == EMPTY) {
 
-}
-void SyntaxAnalyzer::declarationListPrime(){
+    }
+    declarationListPrime();
 
 }
 void SyntaxAnalyzer::declaration(){
@@ -58,15 +59,60 @@ void SyntaxAnalyzer::declaration(){
     }
 
 }
+void SyntaxAnalyzer::declarationListPrime(){
+
+}
+
 void SyntaxAnalyzer::declarationPrime() {
     declarationPrimeFactor();
+    if (nextToken == EMPTY) {
+        if (currentToken.compare("(")) {
+            params();
+            if (currentToken.compare(")")) {
+                nextToken = LA.lex();
+                currentToken = LA.lexenum;
+                compoundStmt();
+            }
+        }
+    } else {
+        cout << exitString << endl;
+        exit(1);
+    }
 
 }
 void SyntaxAnalyzer::declarationPrimeFactor() {
     if (currentToken.compare(";")) {
         nextToken = LA.lex();
         currentToken = LA.lexenum;
-    }else
+    }else{
+        if(currentToken.compare("[")){
+            nextToken = LA.lex();
+            currentToken = LA.lexenum;
+            if (nextToken == INT) {
+                nextToken = LA.lex();
+                currentToken = LA.lexenum;
+                if (currentToken.compare("]")) {
+                    nextToken = LA.lex();
+                    currentToken = LA.lexenum;
+                    if (currentToken.compare(";")) {
+                        nextToken = LA.lex();
+                        currentToken = LA.lexenum;
+                    } else {
+                        cout << exitString << endl;
+                        exit(1);
+                    }
+                } else {
+                    cout << exitString << endl;
+                    exit(1);
+                }
+            } else {
+                cout << exitString << endl;
+                exit(1);
+            }
+        } else {
+            nextToken = EMPTY;
+        }
+    }
 
 }
 void SyntaxAnalyzer::typeSpecific(){
