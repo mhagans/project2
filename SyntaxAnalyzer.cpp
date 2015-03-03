@@ -40,9 +40,14 @@ void SyntaxAnalyzer::program(){
 void SyntaxAnalyzer::declarationList(){
     declaration();
     if (nextToken == EMPTY) {
+        cout << exitString << endl;
+        exit(1);
 
     }
     declarationListPrime();
+    if (nextToken == EMPTY) {
+        ;
+    }
 
 }
 void SyntaxAnalyzer::declaration(){
@@ -60,13 +65,20 @@ void SyntaxAnalyzer::declaration(){
 
 }
 void SyntaxAnalyzer::declarationListPrime(){
+    declaration();
+    if (nextToken == EMPTY) {
+        ;
+    }else {
+        declarationListPrime();
+    }
 
 }
-
 void SyntaxAnalyzer::declarationPrime() {
     declarationPrimeFactor();
     if (nextToken == EMPTY) {
         if (currentToken.compare("(")) {
+            nextToken = LA.lex();
+            currentToken = LA.lexenum;
             params();
             if (currentToken.compare(")")) {
                 nextToken = LA.lex();
@@ -125,8 +137,24 @@ void SyntaxAnalyzer::typeSpecific(){
     }
 
 }
-void SyntaxAnalyzer::params(){
+void SyntaxAnalyzer::params() {
+    if (currentToken.compare("int")) {
+        nextToken = LA.lex();
+        currentToken = LA.lexenum;
+        if (nextToken == ID) {
+            nextToken = LA.lex();
+            currentToken = LA.lexenum;
 
+        } else {
+            cout << exitString << endl;
+        }
+    }else {
+        if (currentToken.compare("void")) {
+
+        }else {
+            if(currentToken.compare("float"))
+        }
+    }
 }
 void SyntaxAnalyzer::paramsPrime(){
 
