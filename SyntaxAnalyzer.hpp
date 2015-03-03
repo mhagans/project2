@@ -13,15 +13,15 @@ enum{EMPTY};
 class SyntaxAnalyzer {
     public:
     void syntax();
-    void setNewInput(string
-    in);
-    SyntaxAnalyzer(string
-    in);
+    void setNewInput(string in);
+    SyntaxAnalyzer(string in);
     virtual ~SyntaxAnalyzer();
-
-    string
-    exitString = "Incorrect Syntax Exiting Program";
+    int nextToken;
+    int tempToken;
+    string currentToken;
+    string exitString = "Incorrect Syntax Exiting Program";
     int emptyTest;
+    LexicalAnalyzer LA;
 
 
     private:
@@ -64,15 +64,8 @@ class SyntaxAnalyzer {
     void factorPrime();
     void args();
     void argsPrime();
+    void moveToken();
 
-
-
-    private:
-    LexicalAnalyzer
-    LA;
-    int nextToken;
-    int tempToken;
-    string currentToken;
 };
 
 #endif

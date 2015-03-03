@@ -25,11 +25,14 @@ int main(int argc, char **argv) {
     int token = SPACE;
 
    ifstream FILE(filename.c_str());
-
+    getline(FILE, fileLine);
+    SyntaxAnalyzer SA(fileLine);
     if(FILE.is_open()){
-        getline(FILE, fileLine);
-        SyntaxAnalyzer SA(fileLine);
-        do{
+
+        do {
+            if (SA.currentToken.compare("")) {
+                SA.LA.lex();
+            }
             SA.syntax();
             getline(FILE, fileLine);
 
