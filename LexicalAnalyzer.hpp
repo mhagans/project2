@@ -6,10 +6,11 @@
 #include <ctype.h>
 #include <fstream>
 #include <stack>
+#include <vector>
 
 using namespace std;
 
-enum {DIGIT, LETTER, KEYWORD, ID, INT, FLOAT, ERROR, SPACE, STOP, SYMBOL};
+enum {DIGIT, LETTER, KEYWORD, ID, INT, FLOAT, ERROR, SPACE, STOP, SYMBOL, EMPTY};
 
 class LexicalAnalyzer{
 
@@ -21,6 +22,7 @@ public:
     string sKeywords [7];
     bool isFloat;
     stack<int> xComment;
+    vector<string> array;
 
 private:
     string input;

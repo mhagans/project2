@@ -126,7 +126,6 @@ void LexicalAnalyzer::getChar(){
 
 
         }else{
-
             charClass = SYMBOL;
         }
 

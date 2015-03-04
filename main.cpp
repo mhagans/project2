@@ -4,10 +4,15 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <stdio.h>
+#include <sstream>
 #include "LexicalAnalyzer.hpp"
 #include "SyntaxAnalyzer.hpp"
 
 using namespace std;
+
+string tokenConverter(int t);
 
 int main(int argc, char **argv) {
     string filename;
@@ -24,22 +29,51 @@ int main(int argc, char **argv) {
 
     int token = SPACE;
 
+
    ifstream FILE(filename.c_str());
     getline(FILE, fileLine);
-    SyntaxAnalyzer SA(fileLine);
-    if(FILE.is_open()){
 
+
+
+    if(FILE.is_open()){
+        LexicalAnalyzer LA(fileLine);
+        string build;
         do {
-            if (SA.currentToken.compare("")) {
-                SA.LA.lex();
+
+            while(token != STOP){
+                token = LA.lex();
+                if(token == STOP){
+                }else{
+                    /*if(token == ID){
+                        cout << tokenConverter(token) <<":\t" <<LA.lexenum<< " DEPTH: " << LA.depth << endl;
+                    }else{
+                        cout << tokenConverter(token) <<":\t" <<LA.lexenum<< endl;
+                    }*/
+
+                    stringstream convert;
+                    convert << token;
+
+                    LA.array.push_back(LA.lexenum + " " + convert.str());
+                }
+
             }
-            SA.syntax();
+
             getline(FILE, fileLine);
 
-            SA.setNewInput(fileLine);
+            LA.setNewInput(fileLine);
             token = SPACE;
 
         }while(!FILE.eof());
+        FILE.close();
+
+        LA.array.push_back("$");
+
+        /*for (int i = 0; i < LA.array.size(); ++i) {
+            cout<< LA.array[i] << endl;
+        }*/
+
+        SyntaxAnalyzer SA(LA.array);
+        SA.syntax();
 
     }else{
         cout << "Unable to open " << filename <<endl;
@@ -47,6 +81,35 @@ int main(int argc, char **argv) {
 
     return 0;
 }
+string tokenConverter(int t){
+    switch (t){
+        case SPACE:
+            return "SPACE";
+        case LETTER:
+            return "LETTER";
+        case DIGIT:
+            return "DIGIT";
+        case ID:
+            return "ID";
+        case INT:
+            return "INT";
+        case ERROR:
+            return "ERROR";
+        case STOP:
+            return "STOP";
+        case FLOAT:
+            return "FLOAT";
+        case SYMBOL:
+            return "SYMBOL";
+        case KEYWORD:
+            return "KEYWORD";
+
+        default:
+            return "UNKOWN";
+    }
+    return 0;
+}
+
 
 #endif
 #pragma clang diagnostic pop

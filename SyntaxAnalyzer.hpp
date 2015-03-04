@@ -5,23 +5,26 @@
 #include <string>
 #include "LexicalAnalyzer.hpp"
 #include "cstdlib"
+#include <vector>
 
 using namespace std;
 
-enum{EMPTY};
+
 
 class SyntaxAnalyzer {
     public:
     void syntax();
     void setNewInput(string in);
-    SyntaxAnalyzer(string in);
+    SyntaxAnalyzer(vector<string> input);
     virtual ~SyntaxAnalyzer();
-    int nextToken;
-    int tempToken;
+    int index;
+    vector<string> tokenArray;
     string currentToken;
+    string tempToken;
+    int tempClass;
+    int currentClass;
     string exitString = "Incorrect Syntax Exiting Program";
-    int emptyTest;
-    LexicalAnalyzer LA;
+
 
 
     private:
@@ -64,8 +67,7 @@ class SyntaxAnalyzer {
     void factorPrime();
     void args();
     void argsPrime();
-    void moveToken();
-
+    void Splitter();
 };
 
 #endif
