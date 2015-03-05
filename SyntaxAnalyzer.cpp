@@ -9,9 +9,9 @@ SyntaxAnalyzer::SyntaxAnalyzer(vector<string> input) {
     tokenArray = input;
     index = 0;
 
-    for (int i = 0; i < tokenArray.size(); ++i) {
+    /*for (int i = 0; i < tokenArray.size(); ++i) {
         cout << tokenArray[i] << endl;
-    }
+    }*/
 }
 
 SyntaxAnalyzer::~SyntaxAnalyzer() {

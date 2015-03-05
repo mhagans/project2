@@ -64,7 +64,7 @@ bool LexicalAnalyzer::isSymbol() {
 
 void LexicalAnalyzer::getChar(){
 
-    cout<<"Current String: "<< input<<endl;
+    //cout<<"Current String: "<< input<<endl;
     if(input.size() > 0) {
         currentChar = input[0];
         input.erase(0, 1);
