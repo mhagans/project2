@@ -44,7 +44,7 @@ class SyntaxAnalyzer {
     void localDeclarations();
     void localDeclarationsPrime();
     void statementList();
-    void staementListPrime();
+    void statementListPrime();
     void statement();
     void expressionStmt();
     void selectionStmt();
@@ -68,6 +68,14 @@ class SyntaxAnalyzer {
     void args();
     void argsPrime();
     void Splitter();
+
+    void FailExit();
+
+    void EmptyCheck();
+
+    void TokenStmt();
+
+    void isEmpty();
 };
 
 #endif
