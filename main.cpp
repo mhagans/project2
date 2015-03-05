@@ -7,6 +7,7 @@
 #include <vector>
 #include <stdio.h>
 #include <sstream>
+#include <time.h>
 #include "LexicalAnalyzer.hpp"
 #include "SyntaxAnalyzer.hpp"
 
@@ -17,6 +18,8 @@ string tokenConverter(int t);
 int main(int argc, char **argv) {
     string filename;
     string fileLine;
+    time_t startTime;
+    time_t endTime;
 
     if(argc < 2){
         cout << "Invalid number of arugments entered"<<endl;
@@ -37,10 +40,11 @@ int main(int argc, char **argv) {
     getline(FILE, fileLine);
 
 
-
+    time(&startTime);
+    cout<<"Start Time: "<< startTime <<endl;
     if(FILE.is_open()){
         LexicalAnalyzer LA(fileLine);
-        string build;
+
         do {
 
             while(token != STOP){
@@ -77,10 +81,14 @@ int main(int argc, char **argv) {
 
         SyntaxAnalyzer SA(LA.array);
         SA.syntax();
+        time(&endTime);
+        cout<<"EndTime: "<< endTime<<endl;
+        cout<<"Total Run Time: "<< difftime(endTime, startTime)<<endl;
 
     }else{
         cout << "Unable to open " << filename <<endl;
     }
+
 
     return 0;
 }
