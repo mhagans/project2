@@ -7,9 +7,6 @@
 #include "cstdlib"
 #include <vector>
 
-using namespace std;
-
-
 
 class SyntaxAnalyzer {
     public:
