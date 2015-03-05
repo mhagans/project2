@@ -20,7 +20,7 @@ class SyntaxAnalyzer {
     string tempToken;
     int tempClass;
     int currentClass;
-    string exitString = "Incorrect Syntax Exiting Program CURRENT TOKEN: " + currentToken;
+    string exitString;
 
 
 
