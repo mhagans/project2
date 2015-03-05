@@ -30,7 +30,10 @@ int main(int argc, char **argv) {
     int token = SPACE;
 
 
-   ifstream FILE(filename.c_str());
+   fstream FILE(filename.c_str());
+    FILE << "\n";
+    FILE.close();
+    FILE.open(filename.c_str());
     getline(FILE, fileLine);
 
 
@@ -64,7 +67,7 @@ int main(int argc, char **argv) {
             token = SPACE;
 
         }while(!FILE.eof());
-        FILE.close();
+        //FILE.close();
 
         LA.array.push_back("$");
 

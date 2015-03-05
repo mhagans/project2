@@ -51,7 +51,8 @@ void SyntaxAnalyzer::declarationList(){
     if (currentClass == EMPTY){
         ;
     }
-
+cout <<"LEAVING DECLARATIONLIST CALL"<<endl;
+    TokenStmt();
 }
 
 void SyntaxAnalyzer::declaration(){
@@ -70,6 +71,8 @@ void SyntaxAnalyzer::declaration(){
             FailExit();
         }
     }
+    cout<<"LEAVING DECLARATION CALL"<<endl;
+    TokenStmt();
 }
 
 void SyntaxAnalyzer::declarationListPrime(){
@@ -85,6 +88,7 @@ void SyntaxAnalyzer::declarationListPrime(){
     }else {
         declarationListPrime();
     }
+    cout<<"LEAVING DECLARATIONLISTPRIME CALL"<<endl;
 }
 
 void SyntaxAnalyzer::declarationPrime() {
@@ -100,9 +104,9 @@ void SyntaxAnalyzer::declarationPrime() {
                 Splitter();
                 compoundStmt();
             }
+        }else {
+            FailExit();
         }
-    } else {
-        FailExit();
     }
     cout<<"LEAVING DECLARATIONPRIME CALL"<<endl;
 
@@ -546,16 +550,11 @@ void SyntaxAnalyzer::returnStmtPrime(){
         expression();
         cout<<"CHECK TO SEE IF RETURNSTMTPRIME CAN MOVE"<<endl;
         TokenStmt();
-        if (currentClass == EMPTY) {
-            //FailExit();
+        if (currentToken == ";") {
+            Splitter();
+            TokenStmt();
         }else {
-            if (currentToken == ";") {
-                Splitter();
-                TokenStmt();
-
-            }else {
-                FailExit();
-            }
+            FailExit();
         }
     }
 
