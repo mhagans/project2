@@ -7,7 +7,7 @@
 //using namespace std;
 
 SyntaxAnalyzer::SyntaxAnalyzer(vector<string> input) {
-    exitString  = "Incorrect Syntax Exiting Program CURRENT TOKEN: " + currentToken;
+    exitString  = "Incorrect Syntax Exiting Program Current Token: " + currentToken;
     tokenArray = input;
     index = 0;
 
@@ -37,13 +37,13 @@ void SyntaxAnalyzer::syntax() {
 }
 
 void SyntaxAnalyzer::program(){
-    cout << "inside program call"<< endl;
+    //cout << "inside program call"<< endl;
     declarationList();
 
 }
 
 void SyntaxAnalyzer::declarationList(){
-    cout << "inside declarationList call"<< endl;
+   // cout << "inside declarationList call"<< endl;
     declaration();
     if (currentClass == EMPTY) {
         FailExit();
@@ -53,32 +53,32 @@ void SyntaxAnalyzer::declarationList(){
     if (currentClass == EMPTY){
         ;
     }
-cout <<"LEAVING DECLARATIONLIST CALL"<<endl;
-    TokenStmt();
+    //cout <<"LEAVING DECLARATIONLIST CALL"<<endl;
+    //TokenStmt();
 }
 
 void SyntaxAnalyzer::declaration(){
-    cout<<"inside declaration call"<<endl;
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+   // cout<<"inside declaration call"<<endl;
+   // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
     typeSpecific();
     if (currentClass != EMPTY) {
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+        //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
         if(currentClass == ID) {
-            cout<< "inside declaratoin ID check"<<endl;
+           // cout<< "inside declaratoin ID check"<<endl;
             Splitter();
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+           // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
             declarationPrime();
         }else {
-            cout<<"inside declartion fail ID check"<<endl;
+            //cout<<"inside declartion fail ID check"<<endl;
             FailExit();
         }
     }
-    cout<<"LEAVING DECLARATION CALL"<<endl;
-    TokenStmt();
+   // cout<<"LEAVING DECLARATION CALL"<<endl;
+    //TokenStmt();
 }
 
 void SyntaxAnalyzer::declarationListPrime(){
-    cout<<"inside declarationListPrime call"<<endl;
+   // cout<<"inside declarationListPrime call"<<endl;
     tempToken = currentToken;
     tempClass = currentClass;
 
@@ -90,11 +90,11 @@ void SyntaxAnalyzer::declarationListPrime(){
     }else {
         declarationListPrime();
     }
-    cout<<"LEAVING DECLARATIONLISTPRIME CALL"<<endl;
+   // cout<<"LEAVING DECLARATIONLISTPRIME CALL"<<endl;
 }
 
 void SyntaxAnalyzer::declarationPrime() {
-    cout<<"inside declarationPrime call"<<endl;
+   // cout<<"inside declarationPrime call"<<endl;
     declarationPrimeFactor();
     if (currentClass == EMPTY) {
         currentClass = tempClass;
@@ -110,30 +110,30 @@ void SyntaxAnalyzer::declarationPrime() {
             FailExit();
         }
     }
-    cout<<"LEAVING DECLARATIONPRIME CALL"<<endl;
+   // cout<<"LEAVING DECLARATIONPRIME CALL"<<endl;
 
 }
 
 void SyntaxAnalyzer::declarationPrimeFactor() {
-    cout<< "inside declarationPrimeFactor"<<endl;
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+    /*cout<< "inside declarationPrimeFactor"<<endl;
+    cout <<"tokens: " << currentToken << " " << currentClass<< endl;*/
     if (currentToken == ";") {
         Splitter();
     }else{
-        cout <<"inside declarationPrimeFactor else statement"<<endl;
+        //cout <<"inside declarationPrimeFactor else statement"<<endl;
         if(currentToken == "[") {
             Splitter();
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+            //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
             if (currentClass == INT) {
-                cout << "inside declarationPrimeFactor NUM check"<<endl;
+                //cout << "inside declarationPrimeFactor NUM check"<<endl;
                 Splitter();
                 if (currentToken == "]") {
-                    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+                    //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
                     Splitter();
                     if (currentToken == ";") {
-                        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+                       // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
                         Splitter();
-                        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+                       // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
                     }else {
                         FailExit();
                     }
@@ -149,58 +149,58 @@ void SyntaxAnalyzer::declarationPrimeFactor() {
             currentClass = EMPTY;
         }
     }
-    cout<<"LEAVING DECLARATOINPRIMEFACTOR CALL"<<endl;
-    TokenStmt();
+    //cout<<"LEAVING DECLARATOINPRIMEFACTOR CALL"<<endl;
+   // TokenStmt();
 
 }
 
 void SyntaxAnalyzer::typeSpecific(){
-    cout << "inside typeSpecific call"<<endl;
+    /*cout << "inside typeSpecific call"<<endl;
 
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+    cout <<"tokens: " << currentToken << " " << currentClass<< endl;*/
     if(currentToken == "int"){
-        cout<< "inside typeSpecific  int if statement"<<endl;
+       // cout<< "inside typeSpecific  int if statement"<<endl;
         Splitter();
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+        //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
     }else {
         if(currentToken == "float") {
-            cout<< "inside typeSpecific float if statement"<<endl;
+           // cout<< "inside typeSpecific float if statement"<<endl;
             Splitter();
-            cout <<"tokens: " << currentToken << " " <<currentClass<< endl;
+           // cout <<"tokens: " << currentToken << " " <<currentClass<< endl;
         } else {
             if(currentToken == "void") {
-                cout<< "inside typeSpecific void if statement"<<endl;
+               // cout<< "inside typeSpecific void if statement"<<endl;
                 Splitter();
-                cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+               // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
             }else {
                 // Set Empty variable
-                cout<<"inside typeSpecific fail else statement"<<endl;
-                cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+               // cout<<"inside typeSpecific fail else statement"<<endl;
+               // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
                 isEmpty();
             }
         }
 
     }
-    cout<<"leaving TYPESPECIFIC CALL"<<endl;
+    //cout<<"leaving TYPESPECIFIC CALL"<<endl;
 
 }
 
 void SyntaxAnalyzer::params() {
-    cout <<"inside params call"<<endl;
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+    /*cout <<"inside params call"<<endl;
+    cout <<"tokens: " << currentToken << " " << currentClass<< endl;*/
     if (currentToken == "int") {
         Splitter();
         if (currentClass == ID) {
             Splitter();
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+            //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
             paramPrime();
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+            //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
             paramListPrime();
             if (currentClass == EMPTY) {
                 currentClass = tempClass;
                 currentToken = tempToken;
             }
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+            //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
 
         } else {
             FailExit();
@@ -208,23 +208,23 @@ void SyntaxAnalyzer::params() {
     }else {
         if (currentToken=="void") {
             Splitter();
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+            //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
             paramsPrime();
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+           // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
 
         }else {
             if(currentToken == "float") {
                 if (currentClass == ID) {
                     Splitter();
-                    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+                    //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
                     paramPrime();
-                    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+                    //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
                     paramListPrime();
                     if (currentClass == EMPTY) {
                         currentClass = tempClass;
                         currentToken = tempToken;
                     }
-                    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+                    //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
 
                 } else {
                     FailExit();
@@ -235,32 +235,32 @@ void SyntaxAnalyzer::params() {
 }
 
 void SyntaxAnalyzer::paramsPrime(){
-    cout <<"inside paramsPrime call"<<endl;
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+    /*cout <<"inside paramsPrime call"<<endl;
+    cout <<"tokens: " << currentToken << " " << currentClass<< endl;*/
 
     if(currentClass == ID) {
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+        //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
         Splitter();
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+        //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
         paramPrime();
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+       // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
         paramListPrime();
         if (currentClass == EMPTY) {
             currentClass = tempClass;
             currentToken = tempToken;
         }
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+       // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
 
     }
 
 }
 
 void SyntaxAnalyzer::paramListPrime(){
-    cout << "inside paramListPrime call"<<endl;
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+    /*cout << "inside paramListPrime call"<<endl;
+    cout <<"tokens: " << currentToken << " " << currentClass<< endl;*/
     if (currentToken == ",") {
         Splitter();
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+       // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
         param();
         if (currentClass == EMPTY) {
             FailExit();
@@ -280,14 +280,14 @@ void SyntaxAnalyzer::paramListPrime(){
 }
 
 void SyntaxAnalyzer::param(){
-    cout <<"inside Param call"<<endl;
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+    /*cout <<"inside Param call"<<endl;
+    cout <<"tokens: " << currentToken << " " << currentClass<< endl;*/
     typeSpecific();
     if (currentClass != EMPTY) {
         if (currentClass == ID) {
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+            //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
             Splitter();
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+           // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
 
         }else {
             FailExit();
@@ -299,11 +299,11 @@ void SyntaxAnalyzer::param(){
 }
 
 void SyntaxAnalyzer::paramPrime(){
-    cout << "inside paramPrime call"<<endl;
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+    /*cout << "inside paramPrime call"<<endl;
+    cout <<"tokens: " << currentToken << " " << currentClass<< endl;*/
     if(currentToken =="[") {
         Splitter();
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+        //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
         if (currentToken =="]") {
             Splitter();
         } else {
@@ -314,21 +314,21 @@ void SyntaxAnalyzer::paramPrime(){
 }
 
 void SyntaxAnalyzer::compoundStmt(){
-    cout << "inside compoundStmt call"<<endl;
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+    /*cout << "inside compoundStmt call"<<endl;
+    cout <<"tokens: " << currentToken << " " << currentClass<< endl;*/
     if (currentToken == "{") {
         Splitter();
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+        //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
         localDeclarationsPrime();
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+       // cout <<"tokens: " << currentToken << " " << currentClass<< endl;
         EmptyCheck();
-        cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+        //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
         statementListPrime();
         EmptyCheck();
         // Need to check if empty is ok for statementLIst
         if (currentToken == "}") {
             Splitter();
-            TokenStmt();
+           // TokenStmt();
         }else {
             FailExit();
         }
@@ -344,13 +344,13 @@ void SyntaxAnalyzer::localDeclarations(){
 }
 
 void SyntaxAnalyzer::localDeclarationsPrime(){
-    cout<<"inside localDeclarationsPrime call"<<endl;
+    //cout<<"inside localDeclarationsPrime call"<<endl;
 
     typeSpecific();
     if (currentClass != EMPTY) {
         if (currentClass == ID) {
             Splitter();
-            cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+            //cout <<"tokens: " << currentToken << " " << currentClass<< endl;
             declarationPrimeFactor();
             if (currentClass == EMPTY) {
                 FailExit();
@@ -361,7 +361,7 @@ void SyntaxAnalyzer::localDeclarationsPrime(){
             FailExit();
         }
     }
-    cout<<"LEAVING LOCALdECLARATIONSpRIME"<<endl;
+    //cout<<"LEAVING LOCALdECLARATIONSpRIME"<<endl;
 
 }
 // May be able to Delete this Method
@@ -370,8 +370,8 @@ void SyntaxAnalyzer::statementList(){
 }
 
 void SyntaxAnalyzer::statementListPrime(){
-    cout<<"inside statementListPrime call"<<endl;
-    cout <<"tokens: " << currentToken << " " << currentClass<< endl;
+   /* cout<<"inside statementListPrime call"<<endl;
+    cout <<"tokens: " << currentToken << " " << currentClass<< endl;*/
     statement();
     if (currentClass != EMPTY) {
         statementListPrime();
@@ -381,12 +381,12 @@ void SyntaxAnalyzer::statementListPrime(){
     }
 
 
-    cout<<"LEAVING STATEMENTLISTPrime"<<endl;
+   //cout<<"LEAVING STATEMENTLISTPrime"<<endl;
 }
 
 void SyntaxAnalyzer::statement(){
-    cout<<"inside statement call"<<endl;
-    TokenStmt();
+    //cout<<"inside statement call"<<endl;
+   // TokenStmt();
     expressionStmt();
     if (currentClass == EMPTY) {
         EmptyCheck();
@@ -405,54 +405,54 @@ void SyntaxAnalyzer::statement(){
             }
         }
     }
-    cout<<"LEAVING STATEMENT CALL"<<endl;
+    //cout<<"LEAVING STATEMENT CALL"<<endl;
 }
 
 void SyntaxAnalyzer::expressionStmt(){
-    cout<<"inside expressionStmt call"<<endl;
-    TokenStmt();
+   /* cout<<"inside expressionStmt call"<<endl;
+    TokenStmt();*/
     expression();
     if (currentClass != EMPTY) {
         if (currentToken == ";") {
-            TokenStmt();
+           // TokenStmt();
             Splitter();
-            TokenStmt();
+           // TokenStmt();
         }
     }else {
         EmptyCheck();
         if (currentToken == ";") {
-            TokenStmt();
+           // TokenStmt();
             Splitter();
-            TokenStmt();
+           // TokenStmt();
         }else {
             isEmpty();
         }
     }
-    cout<<"LEAVING EXPRESSIONSTMT"<<endl;
+   // cout<<"LEAVING EXPRESSIONSTMT"<<endl;
 
 }
 
 void SyntaxAnalyzer::selectionStmt(){
-    cout<<"inside selectionStmt call"<<endl;
-    TokenStmt();
+    //cout<<"inside selectionStmt call"<<endl;
+   // TokenStmt();
     if (currentToken == "if") {
         Splitter();
-        TokenStmt();
+       // TokenStmt();
         if (currentToken == "(") {
             Splitter();
-            TokenStmt();
+          //  TokenStmt();
             expression();
-            cout<<"PASSED EXPRESSION IN SELECTIONSTMT"<<endl;
-            TokenStmt();
+           // cout<<"PASSED EXPRESSION IN SELECTIONSTMT"<<endl;
+            //TokenStmt();
             if (currentClass != EMPTY) {
-                cout<<"CHECKING FOR  ) "<<endl;
+                //cout<<"CHECKING FOR  ) "<<endl;
                 if (currentToken == ")") {
-                    cout<<"CHECKING FOR )"<<endl;
+                   // cout<<"CHECKING FOR )"<<endl;
                     Splitter();
-                    TokenStmt();
+                   // TokenStmt();
                     statement();
-                    cout<<"CHECKING TO SEE IF EMPTY OR ELSE IS HERE"<<endl;
-                    TokenStmt();
+                   // cout<<"CHECKING TO SEE IF EMPTY OR ELSE IS HERE"<<endl;
+                   // TokenStmt();
                     if (currentClass == EMPTY) {
                         FailExit();
                     }else {
@@ -470,17 +470,17 @@ void SyntaxAnalyzer::selectionStmt(){
     }else {
         isEmpty();
     }
-    cout<<"LEAVING SELECTIONSTMT"<<endl;
-    TokenStmt();
+    /*cout<<"LEAVING SELECTIONSTMT"<<endl;
+    TokenStmt();*/
 
 }
 
 void SyntaxAnalyzer::selectionStmtPrime(){
-    cout << "inside selectionStmtPrime call"<<endl;
-    TokenStmt();
+    /*cout << "inside selectionStmtPrime call"<<endl;
+    TokenStmt();*/
     if (currentToken == "else") {
         Splitter();
-        TokenStmt();
+       // TokenStmt();
         statement();
         if (currentClass == EMPTY) {
             FailExit();
@@ -488,24 +488,24 @@ void SyntaxAnalyzer::selectionStmtPrime(){
     }else {
         isEmpty();
     }
-    cout<<"LEAVING SELECTIONSTMTPRIME"<<endl;
-    TokenStmt();
+    /*cout<<"LEAVING SELECTIONSTMTPRIME"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::iterationStmt(){
-    cout<<"inside iteratoinStmt call"<<endl;
-    TokenStmt();
+    /*cout<<"inside iteratoinStmt call"<<endl;
+    TokenStmt();*/
     if (currentToken == "while") {
         Splitter();
-        TokenStmt();
+       // TokenStmt();
         if (currentToken == "(") {
             Splitter();
-            TokenStmt();
+           // TokenStmt();
             expression();
             if (currentClass != EMPTY) {
                 if (currentToken == ")") {
                     Splitter();
-                    TokenStmt();
+                   // TokenStmt();
                     statement();
                     EmptyCheck();
                 } else {
@@ -520,15 +520,15 @@ void SyntaxAnalyzer::iterationStmt(){
     }else {
         isEmpty();
     }
-    cout<<"LEAVING ITERATIONsTMT"<<endl;
+   // cout<<"LEAVING ITERATIONsTMT"<<endl;
 }
 
 void SyntaxAnalyzer::returnStmt(){
-    cout<<"inside returnStmt call"<<endl;
-    TokenStmt();
+    /*cout<<"inside returnStmt call"<<endl;
+    TokenStmt();*/
     if (currentToken == "return") {
         Splitter();
-        TokenStmt();
+       // TokenStmt();
         returnStmtPrime();
         if (currentClass == EMPTY) {
             FailExit();
@@ -537,48 +537,48 @@ void SyntaxAnalyzer::returnStmt(){
     }else {
         isEmpty();
     }
-    cout<<"LEAVING RETURNSTMT"<<endl;
-    TokenStmt();
+    //cout<<"LEAVING RETURNSTMT"<<endl;
+   // TokenStmt();
 }
 
 void SyntaxAnalyzer::returnStmtPrime(){
-    cout<<"inside returnStmtPrime call"<<endl;
-    TokenStmt();
+    /*cout<<"inside returnStmtPrime call"<<endl;
+    TokenStmt();*/
     if (currentToken == ";") {
         Splitter();
-        TokenStmt();
+       // TokenStmt();
 
     } else {
         expression();
-        cout<<"CHECK TO SEE IF RETURNSTMTPRIME CAN MOVE"<<endl;
-        TokenStmt();
+        //cout<<"CHECK TO SEE IF RETURNSTMTPRIME CAN MOVE"<<endl;
+        //TokenStmt();
         if (currentToken == ";") {
             Splitter();
-            TokenStmt();
+            //TokenStmt();
         }else {
             FailExit();
         }
     }
 
-    cout<<"LEAVING RETURNSTMTPRIME"<<endl;
-    TokenStmt();
+    /*cout<<"LEAVING RETURNSTMTPRIME"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::expression() {
-    cout<<"inside expression Call"<<endl;
+   // cout<<"inside expression Call"<<endl;
 
     if (currentClass == ID) {
-        cout<<"INSIDE EXPRESSION id CHECK"<<endl;
-        TokenStmt();
+        /*cout<<"INSIDE EXPRESSION id CHECK"<<endl;
+        TokenStmt();*/
         Splitter();
-        TokenStmt();
+        //TokenStmt();
         expressionFactor();
-        TokenStmt();
+        //TokenStmt();
         EmptyCheck();
 
     }else {
         if (currentToken == "(") {
-            TokenStmt();
+           // TokenStmt();
             Splitter();
             expression();
             if (currentClass == EMPTY) {
@@ -586,7 +586,7 @@ void SyntaxAnalyzer::expression() {
             }else {
                 if (currentToken == ")") {
                     Splitter();
-                    TokenStmt();
+                    //TokenStmt();
                     termPrime();
                     EmptyCheck();
                     additiveExpressionPrime();
@@ -599,7 +599,7 @@ void SyntaxAnalyzer::expression() {
         }else {
             if (currentClass == INT) {
                 Splitter();
-                TokenStmt();
+                //TokenStmt();
                 termPrime();
                 EmptyCheck();
                 additiveExpressionPrime();
@@ -610,13 +610,13 @@ void SyntaxAnalyzer::expression() {
             }else {
                 if (currentClass == FLOAT) {
                     Splitter();
-                    TokenStmt();
+                    //TokenStmt();
                     termPrime();
-                    isEmpty();
+                    EmptyCheck();
                     additiveExpressionPrime();
-                    isEmpty();
+                    EmptyCheck();
                     simpleExpressionPrime();
-                    isEmpty();
+                    EmptyCheck();
 
                 }else {
                     isEmpty();
@@ -625,17 +625,17 @@ void SyntaxAnalyzer::expression() {
             }
         }
     }
-    cout<<"leaving expression"<<endl;
-    TokenStmt();
+    /*cout<<"leaving expression"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::expressionFactor(){
-    cout<<"inside expressionFactor call"<< endl;
+    //cout<<"inside expressionFactor call"<< endl;
     expressionPrime();
     EmptyCheck();
     if (currentToken == "=") {
         Splitter();
-        TokenStmt();
+       // TokenStmt();
         expression();
         if (currentClass == EMPTY) {
             FailExit();
@@ -651,23 +651,23 @@ void SyntaxAnalyzer::expressionFactor(){
         simpleExpressionPrime();
         EmptyCheck();
     }
-    cout<<"leaving expressionFactor"<<endl;
-    TokenStmt();
+    /*cout<<"leaving expressionFactor"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::expressionPrime(){
-    cout<<"inside expressionPrime call"<<endl;
-    TokenStmt();
+    /*cout<<"inside expressionPrime call"<<endl;
+    TokenStmt();*/
     if (currentToken == "[") {
         Splitter();
-        TokenStmt();
+       // TokenStmt();
         expression();
         if (currentClass == EMPTY) {
             FailExit();
         }else {
             if (currentToken == "]") {
                 Splitter();
-                TokenStmt();
+                //TokenStmt();
             } else {
                 FailExit();
             }
@@ -679,62 +679,62 @@ void SyntaxAnalyzer::expressionPrime(){
 }
 
 void SyntaxAnalyzer::simpleExpressionPrime(){
-    cout<<"inside simpleExpressionPrime()"<<endl;
-    TokenStmt();
+    /*cout<<"inside simpleExpressionPrime()"<<endl;
+    TokenStmt();*/
     relop();
     if (currentClass != EMPTY) {
-        cout<<"inside simpleExpressionPrime EMPTY"<<endl;
+        //cout<<"inside simpleExpressionPrime EMPTY"<<endl;
         additiveExpression();
-        cout<<"passed additiveExpression in simpleExpression"<<endl;
-        TokenStmt();
+       // cout<<"passed additiveExpression in simpleExpression"<<endl;
+        //TokenStmt();
         EmptyCheck();
-        cout<<"checking tokens after additive"<<endl;
-        TokenStmt();
+        //cout<<"checking tokens after additive"<<endl;
+        //TokenStmt();
         if (currentClass == EMPTY) {
-            cout<<"inside simpeleExpressionPrime Fail"<<endl;
+            //cout<<"inside simpeleExpressionPrime Fail"<<endl;
             FailExit();
         }
     }/*else {
         cout<<"CHECKING<<<<<<<<"<<endl;
-        TokenStmt();
+       // TokenStmt();
         isEmpty();
-        TokenStmt();
+       // TokenStmt();
     }*/
-    cout<<"leaving simpleExpressionPrime"<<endl;
-    TokenStmt();
+    /*cout<<"leaving simpleExpressionPrime"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::relop() {
-    cout<<"inside relop call"<<endl;
-    TokenStmt();
+    /*cout<<"inside relop call"<<endl;
+    TokenStmt();*/
     if (currentToken == "<=") {
         Splitter();
-        TokenStmt();
+        //TokenStmt();
 
     }else {
         if (currentToken == "<") {
             Splitter();
-            TokenStmt();
+            //TokenStmt();
 
         }else {
             if (currentToken == ">") {
                 Splitter();
-                TokenStmt();
+                //TokenStmt();
 
             }else {
                 if (currentToken == ">=") {
                     Splitter();
-                    TokenStmt();
+                    //TokenStmt();
 
                 }else {
                     if (currentToken == "==") {
                         Splitter();
-                        TokenStmt();
+                        //TokenStmt();
 
                     }else {
                         if (currentToken == "!=") {
                             Splitter();
-                            TokenStmt();
+                            //TokenStmt();
 
                         }else {
                             isEmpty();
@@ -745,68 +745,68 @@ void SyntaxAnalyzer::relop() {
 
         }
     }
-    cout<<"leaving relop call"<<endl;
-    TokenStmt();
+    /*cout<<"leaving relop call"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::additiveExpression(){
-    cout<<"inside additiveExpression Call"<<endl;
-    TokenStmt();
+    /*cout<<"inside additiveExpression Call"<<endl;
+    TokenStmt();*/
     term();
     if (currentClass != EMPTY) {
-        cout<<"inside additiveExpression EMPTY check"<<endl;
+        //cout<<"inside additiveExpression EMPTY check"<<endl;
         additiveExpressionPrime();
-        cout<<"Passed addtiiveExpressionPrime in addtiveExpression"<<endl;
+       //cout<<"Passed addtiiveExpressionPrime in addtiveExpression"<<endl;
         EmptyCheck();
     }
-    cout<<"LEAVING ADDITIVEEXPRESSION"<<endl;
-    TokenStmt();
+    /*cout<<"LEAVING ADDITIVEEXPRESSION"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::additiveExpressionPrime(){
-    cout<<"inside additiveExpressionPrime call"<<endl;
-    TokenStmt();
+    /*cout<<"inside additiveExpressionPrime call"<<endl;
+    TokenStmt();*/
     addop();
     if (currentClass != EMPTY) {
-        cout<<"inside additiveExpressionPrime empty check"<<endl;
+       // cout<<"inside additiveExpressionPrime empty check"<<endl;
         term();
         if (currentClass != EMPTY) {
             additiveExpressionPrime();
-            cout<<"inside additiveExpressionPrime term check"<<endl;
+           // cout<<"inside additiveExpressionPrime term check"<<endl;
             EmptyCheck();
         }else {
-            cout<<"inside additiveExpression Fail check"<<endl;
+           // cout<<"inside additiveExpression Fail check"<<endl;
             //FailExit();
         }
     }
-    cout<<"leaving additiveExpressionPrime"<<endl;
-    TokenStmt();
+    /*cout<<"leaving additiveExpressionPrime"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::addop(){
-    cout<<"inside addop call"<<endl;
-    TokenStmt();
+   /* cout<<"inside addop call"<<endl;
+    TokenStmt();*/
     if (currentToken == "+") {
         Splitter();
-        TokenStmt();
+        //TokenStmt();
     }else {
         if (currentToken == "-") {
             Splitter();
-            TokenStmt();
+            //TokenStmt();
         }else {
-            cout<<"inside empty of addop"<<endl;
-            TokenStmt();
+            /*cout<<"inside empty of addop"<<endl;
+            TokenStmt();*/
             isEmpty();
-            TokenStmt();
+          //  TokenStmt();
         }
     }
-    cout<<"leaving addop"<<endl;
-    TokenStmt();
+    /*cout<<"leaving addop"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::term(){
-    cout<<"inside term call"<<endl;
-    TokenStmt();
+    /*cout<<"inside term call"<<endl;
+    TokenStmt();*/
     factor();
     if (currentClass != EMPTY) {
         termPrime();
@@ -814,62 +814,62 @@ void SyntaxAnalyzer::term(){
     }else {
         FailExit();
     }
-    cout<<"leaving term()"<<endl;
-    TokenStmt();
+    /*cout<<"leaving term()"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::termPrime(){
-    cout<<"inside termPrime"<<endl;
-    TokenStmt();
+    /*cout<<"inside termPrime"<<endl;
+    TokenStmt();*/
     mulop();
     if (currentClass != EMPTY) {
-        TokenStmt();
+       // TokenStmt();
         factor();
         if (currentClass != EMPTY) {
-            TokenStmt();
+           // TokenStmt();
             termPrime();
             EmptyCheck();
         }else {
             FailExit();
         }
     }
-    cout<<"leaving termPrime"<<endl;
-    TokenStmt();
+   /* cout<<"leaving termPrime"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::mulop(){
-    cout<<"inside mulop call"<<endl;
-    TokenStmt();
+    /*cout<<"inside mulop call"<<endl;
+    TokenStmt();*/
     if (currentToken == "*") {
         Splitter();
-        TokenStmt();
+       // TokenStmt();
     }else {
         if (currentToken == "/") {
             Splitter();
-            TokenStmt();
+            //TokenStmt();
         } else {
             isEmpty();
         }
     }
-    cout<<"leaving mulop"<<endl;
-    TokenStmt();
+   /* cout<<"leaving mulop"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::factor(){
-    cout<<"inside factor call"<<endl;
-    TokenStmt();
+    /*cout<<"inside factor call"<<endl;
+    TokenStmt();*/
     if (currentToken == "(") {
-        cout<<"inside factor ( if statement"<<endl;
+       // cout<<"inside factor ( if statement"<<endl;
         Splitter();
-        TokenStmt();
+        //TokenStmt();
         expression();
         if (currentClass == EMPTY) {
             FailExit();
         }else {
             if (currentToken == ")") {
-                cout<<"inside factor ) if statement"<<endl;
+                //cout<<"inside factor ) if statement"<<endl;
                 Splitter();
-                TokenStmt();
+                //TokenStmt();
             }else {
                 FailExit();
             }
@@ -877,15 +877,15 @@ void SyntaxAnalyzer::factor(){
     }else {
         if (currentClass == INT) {
             Splitter();
-            TokenStmt();
+            //TokenStmt();
         }else {
             if (currentClass == FLOAT) {
                 Splitter();
-                TokenStmt();
+                //TokenStmt();
             }else {
                 if (currentClass == ID) {
                     Splitter();
-                    TokenStmt();
+                   // TokenStmt();
                     factorPrime();
                     EmptyCheck();
                 }else{
@@ -894,49 +894,49 @@ void SyntaxAnalyzer::factor(){
             }
         }
     }
-    cout<<"LEAVING FACTOR"<<endl;
-    TokenStmt();
+    /*cout<<"LEAVING FACTOR"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::factorPrime(){
-    cout<<"inside factorPrime call"<<endl;
-    TokenStmt();
+    /*cout<<"inside factorPrime call"<<endl;
+    TokenStmt();*/
     if (currentToken == "(") {
         Splitter();
-        TokenStmt();
+      //  TokenStmt();
         args();
 
         if (currentToken == ")") {
             Splitter();
-            TokenStmt();
+          //  TokenStmt();
         }
     }else {
         expressionPrime();
         EmptyCheck();
 
     }
-    cout<<"LEAVING FACTORPRIME"<<endl;
-    TokenStmt();
+    /*cout<<"LEAVING FACTORPRIME"<<endl;
+    TokenStmt();*/
 }
 
 void SyntaxAnalyzer::args(){
-    cout<<"inside args call"<<endl;
-    TokenStmt();
+    /*cout<<"inside args call"<<endl;
+    TokenStmt();*/
     expression();
     if (currentClass != EMPTY) {
         argsPrime();
         EmptyCheck();
     }
-    cout<<"leaving args call"<<endl;
+    //cout<<"leaving args call"<<endl;
 }
 
 void SyntaxAnalyzer::argsPrime(){
-    cout<<"inside argsPrime call"<<endl;
-    TokenStmt();
+    /*cout<<"inside argsPrime call"<<endl;
+    TokenStmt();*/
     if (currentToken == ",") {
         Splitter();
         expression();
-        TokenStmt();
+       // TokenStmt();
         if (currentClass == EMPTY) {
             FailExit();
         }
@@ -945,7 +945,7 @@ void SyntaxAnalyzer::argsPrime(){
     }else {
         isEmpty();
     }
-    cout<<"leaving argsPrime"<<endl;
+    //cout<<"leaving argsPrime"<<endl;
 }
 
 void SyntaxAnalyzer::Splitter() {
