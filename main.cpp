@@ -18,8 +18,8 @@ string tokenConverter(int t);
 int main(int argc, char **argv) {
     string filename;
     string fileLine;
-    time_t startTime;
-    time_t endTime;
+   /* time_t startTime;
+    time_t endTime;*/
 
     if(argc < 2){
         cout << "Invalid number of arugments entered"<<endl;
@@ -40,8 +40,8 @@ int main(int argc, char **argv) {
     getline(FILE, fileLine);
 
 
-    time(&startTime);
-    cout<<"Start Time: "<< startTime <<endl;
+   /* time(&startTime);
+    cout<<"Start Time: "<< startTime <<endl;*/
     if(FILE.is_open()){
         LexicalAnalyzer LA(fileLine);
 
@@ -81,9 +81,9 @@ int main(int argc, char **argv) {
 
         SyntaxAnalyzer SA(LA.array);
         SA.syntax();
-        time(&endTime);
-        cout<<"EndTime: "<< endTime<<endl;
-        cout<<"Total Run Time: "<< difftime(endTime, startTime)<<endl;
+       // time(&endTime);
+       // cout<<"EndTime: "<< endTime<<endl;
+        //cout<<"Total Run Time: "<< difftime(endTime, startTime)<<endl;
 
     }else{
         cout << "Unable to open " << filename <<endl;
