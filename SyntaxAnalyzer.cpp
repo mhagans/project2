@@ -104,6 +104,7 @@ void SyntaxAnalyzer::declarationPrime() {
     } else {
         FailExit();
     }
+    cout<<"LEAVING DECLARATIONPRIME CALL"<<endl;
 
 }
 
@@ -142,6 +143,8 @@ void SyntaxAnalyzer::declarationPrimeFactor() {
             currentClass = EMPTY;
         }
     }
+    cout<<"LEAVING DECLARATOINPRIMEFACTOR CALL"<<endl;
+    TokenStmt();
 
 }
 
@@ -172,6 +175,7 @@ void SyntaxAnalyzer::typeSpecific(){
         }
 
     }
+    cout<<"leaving TYPESPECIFIC CALL"<<endl;
 
 }
 
@@ -319,6 +323,8 @@ void SyntaxAnalyzer::compoundStmt(){
         if (currentToken == "}") {
             Splitter();
             TokenStmt();
+        }else {
+            FailExit();
         }
     }else {
         isEmpty();
@@ -361,11 +367,15 @@ void SyntaxAnalyzer::statementListPrime(){
     cout<<"inside statementListPrime call"<<endl;
     cout <<"tokens: " << currentToken << " " << currentClass<< endl;
     statement();
-    EmptyCheck();
-    statementListPrime();
-    EmptyCheck();
+    if (currentClass != EMPTY) {
+        statementListPrime();
+        EmptyCheck();
+    }else {
+        EmptyCheck();
+    }
 
-    cout<<"LEAVING STATEMENTLIST"<<endl;
+
+    cout<<"LEAVING STATEMENTLISTPrime"<<endl;
 }
 
 void SyntaxAnalyzer::statement(){
@@ -384,6 +394,7 @@ void SyntaxAnalyzer::statement(){
                 if (currentClass == EMPTY) {
                     EmptyCheck();
                     returnStmt();
+
                 }
             }
         }
@@ -517,6 +528,8 @@ void SyntaxAnalyzer::returnStmt(){
             FailExit();
         }
 
+    }else {
+        isEmpty();
     }
     cout<<"LEAVING RETURNSTMT"<<endl;
     TokenStmt();

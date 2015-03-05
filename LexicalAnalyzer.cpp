@@ -103,7 +103,7 @@ void LexicalAnalyzer::getChar(){
     if(currentChar > 47 && currentChar < 58)
         charClass = DIGIT;
 
-    if(currentChar == ' ')
+    if(currentChar == ' ' || currentChar == '\t')
         charClass = SPACE;
 
     if(currentChar == '$')
