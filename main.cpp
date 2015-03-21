@@ -33,9 +33,7 @@ int main(int argc, char **argv) {
     int token = SPACE;
 
 
-   fstream FILE(filename.c_str());
-    FILE << "\n";
-    FILE.close();
+   fstream FILE;
     FILE.open(filename.c_str());
     getline(FILE, fileLine);
 
@@ -45,7 +43,28 @@ int main(int argc, char **argv) {
     if(FILE.is_open()){
         LexicalAnalyzer LA(fileLine);
 
+        while(token != STOP){
+            token = LA.lex();
+            if(token == STOP){
+            }else{
+                /* if(token == ID){
+                     cout << tokenConverter(token) <<":\t" <<LA.lexenum<< " DEPTH: " << LA.depth << endl;
+                 }else{
+                     cout << tokenConverter(token) <<":\t" <<LA.lexenum<< endl;
+                 }*/
+
+                stringstream convert;
+                convert << token;
+
+                LA.array.push_back(LA.lexenum + " " + convert.str());
+            }
+
+        }
+
         do {
+            getline(FILE, fileLine);
+            LA.setNewInput(fileLine);
+            token = SPACE;
 
             while(token != STOP){
                 token = LA.lex();
@@ -65,13 +84,11 @@ int main(int argc, char **argv) {
 
             }
 
-            getline(FILE, fileLine);
 
-            LA.setNewInput(fileLine);
-            token = SPACE;
 
         }while(!FILE.eof());
         //FILE.close();
+       // LA.array.push_back(LA.lexenum + " " + convert.str());
 
         LA.array.push_back("$");
 

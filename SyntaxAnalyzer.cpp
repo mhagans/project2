@@ -12,9 +12,9 @@ SyntaxAnalyzer::SyntaxAnalyzer(vector<string> input) {
     index = 0;
     exitString = "Incorrect Syntax Exiting Program CURRENT TOKEN: " + currentToken;
 
-    /*for (int i = 0; i < tokenArray.size(); ++i) {
+    for (int i = 0; i < tokenArray.size(); ++i) {
         cout << tokenArray[i] << endl;
-    }*/
+    }
 }
 
 SyntaxAnalyzer::~SyntaxAnalyzer() {
